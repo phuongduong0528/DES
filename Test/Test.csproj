@@ -60,6 +60,10 @@
       <Project>{371e5f50-50c0-4dc1-9ba9-7e25c27d5412}</Project>
       <Name>DES.Ults</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DES\DES.csproj">
+      <Project>{b5b99e8f-7daf-4df1-b7c3-f8bd976a6d01}</Project>
+      <Name>DES</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

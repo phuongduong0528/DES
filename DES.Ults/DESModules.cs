@@ -13,12 +13,15 @@ namespace DES.Ults
             int[] re = new int[arg1.Length];
             for(int i = 0; i < arg1.Length; i++)
             {
-                re[i] = arg1[i] + arg2[i] == 1 ? 1 : 0;
+                if (arg1[i] + arg2[i] == 1)
+                    re[i] = 1;
+                else
+                    re[i] = 0;
             }
             return re;
         }
 
-        public string HexToBin(string hex)
+        private string HexStringToBinString(string hex)
         {
             string result = "";
             result = string.Join(string.Empty, hex.Select(h => 
@@ -28,7 +31,7 @@ namespace DES.Ults
             return result;
         }
 
-        public int[] BinStringToIntArray(string bin)
+        private int[] BinStringToIntArray(string bin)
         {
             List<int> result = new List<int>();
             for (int i = 0; i < bin.Length; i++)
@@ -36,6 +39,11 @@ namespace DES.Ults
                 result.Add(int.Parse(bin[i].ToString()));
             }
             return result.ToArray();
+        }
+
+        public int[] HexStringToIntArray(string hex)
+        {
+            return BinStringToIntArray(HexStringToBinString(hex));
         }
 
         public string BinArrayToHex(int[] bin)
@@ -98,7 +106,7 @@ namespace DES.Ults
             }
         }
 
-        private void Swap(ref int[] leftBlock, ref int[] rightBlock)
+        public void Swap(ref int[] leftBlock, ref int[] rightBlock)
         {
             int[] temp = leftBlock;
             leftBlock = rightBlock;
@@ -113,8 +121,7 @@ namespace DES.Ults
             }
         }
 
-
-        public void SubstituteRound(ref int[] inBlock, int[,] Sbox)
+        private void SubstituteRound(ref int[] inBlock, int[,] Sbox)
         {
             int temp = 3;
             int row = 0;
@@ -124,13 +131,11 @@ namespace DES.Ults
                 column += inBlock[i] * (int)Math.Pow(2, temp);
                 temp--;
             }
-
             row = 2 * inBlock[0] + inBlock[5];
-            string temp2 = HexToBin(Convert.ToString(Sbox[row, column], 16));
-            inBlock = BinStringToIntArray(temp2);
+            inBlock = HexStringToIntArray(Convert.ToString(Sbox[row, column], 16));
         }
         
-        public void Substitude(int[] inputBlock, ref int[] outputBlock)
+        private void Substitude(int[] inputBlock, ref int[] outputBlock)
         {
             int[] temp;
             int[] result = new int[32];
@@ -144,6 +149,20 @@ namespace DES.Ults
             }
 
             outputBlock = result;
+        }
+
+        public void InitialPermutation(ref int[] input)
+        {
+            int[] temp = new int[64];
+            Permute(input, ref temp, DESConstants.InitialPermutation);
+            input = temp;
+        }
+
+        public void FinalPermutation(ref int[] input)
+        {
+            int[] temp = new int[64];
+            Permute(input, ref temp, DESConstants.FinalPermutation);
+            input = temp;
         }
 
         public void Function(int[] rightInput, ref int[] output, int[] roundKey)
