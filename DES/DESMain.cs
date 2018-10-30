@@ -1,7 +1,4 @@
-﻿//===================================================================================================//
-//                                         *UNFINISHED WORK*                                         //
-//===================================================================================================//
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +7,19 @@ using DES.Ults;
 
 namespace DES
 {
-    public class DES
+    public class DESMain
     {
         DESModules modules;
         private string key;
         private string cipherText;
-        private string decriptedText;
+        private string decryptedText;
         public int[][] roundKeys;
 
-        public DES(string key)
+        public DESMain(string key)
         {
             this.key = key;
             cipherText = "";
-            decriptedText = "";
+            decryptedText = "";
             roundKeys = new int[16][];
         }
 
@@ -32,10 +29,8 @@ namespace DES
             roundKeys = modules.GenerateRoundKey(modules.HexStringToIntArray(key));
         }
 
-        public string Encrypt(string hexString)
+        public void Encrypt(string hexString)
         {
-            int[] tempL;
-            int[] tempR;
             int[] binArray = modules.HexStringToIntArray(hexString);
 
             modules.InitialPermutation(ref binArray);
@@ -49,30 +44,22 @@ namespace DES
                 left = modules.XOR(outputF, left);
                 if (i < 15)
                     modules.Swap(ref left, ref right);
-
-                string testL = modules.BinArrayToHex(left);
-                string testR = modules.BinArrayToHex(right);
             }
             
             int[] final = new int[64];
             left.CopyTo(final, 0);
             right.CopyTo(final, 32);
             modules.FinalPermutation(ref final);
-            return modules.BinArrayToHex(final);
+            cipherText = modules.BinArrayToHex(final);
         }
 
-        public string Decrypt(string hexString)
+        public void Decrypt(string hexString)
         {
-            int[] tempL;
-            int[] tempR;
             int[] binArray = modules.HexStringToIntArray(hexString);
 
             modules.InitialPermutation(ref binArray);
             int[] left = modules.SubArray(binArray, 0, 31);
             int[] right = modules.SubArray(binArray, 32, 63);
-
-            string testbinArr = modules.BinArrayToHex(binArray);
-
             for (int i = 15; i >= 0; i--)
             {
                 int[] outputF = new int[32];
@@ -80,16 +67,13 @@ namespace DES
                 left = modules.XOR(outputF, left);
                 if (i > 0)
                     modules.Swap(ref left, ref right);
-
-                string testL = modules.BinArrayToHex(left);
-                string testR = modules.BinArrayToHex(right);
             }
 
             int[] final = new int[64];
             left.CopyTo(final, 0);
             right.CopyTo(final, 32);
             modules.FinalPermutation(ref final);
-            return modules.BinArrayToHex(final);
+            decryptedText = modules.BinArrayToHex(final);
         }
     }
 }
