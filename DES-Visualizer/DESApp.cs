@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,14 +32,43 @@ namespace DES_Visualizer
             return true;
         }
 
-        private void CalculateAndDisplay(string hex, string key)
+        private void CalculateAndDisplay(string hex, string key, int mode)
         {
             string display = "";
+            string final;
+            Stopwatch sw;
             DES.DESMain des = new DES.DESMain(key);
             des.Create();
-            des.Encrypt(hex);
+            if (mode == 0)
+            {
+                sw = Stopwatch.StartNew();
+                des.Encrypt(hex);
+                sw.Stop();
+                final = des.CipherText.ToUpper();
+            }
+            else
+            {
+                sw = Stopwatch.StartNew();
+                des.Decrypt(hex);
+                sw.Stop();
+                final = des.DecryptText.ToUpper();
+            }
+
             display += $"Input data:  {hex.ToUpper()}";
-            display += $"\nCipher text: {des.CipherText.ToUpper()}";
+            display += $"\nFinal data: {final}\n\n";
+            display += $"After Initial Permutation: {des.TraceInit}\n\n";
+            display += "Left".PadLeft(24) + "Right".PadLeft(21) + "Key".PadLeft(14) + "\n";
+            display += "--------------------------------------------------------------------\n";
+            int count = 0;
+            foreach (string[] item in des.TraceRound)
+            {
+                count++;
+                display += "Round" + $"{count}".PadLeft(3) + item[0].PadLeft(20) + item[1].PadLeft(20) + item[2].PadLeft(20) + "\n";
+            }
+            display += $"\nBefore FinalPermutation: {des.TraceFinal}\n";
+            display += $"Final:                   {final}";
+            lbl_output.Text = $"Output: {final}";
+            lbl_time.Text = $"Time: {sw.Elapsed.TotalMilliseconds}" + " ms";
             rtb_main.Text = display;
         }
 
@@ -72,17 +102,41 @@ namespace DES_Visualizer
                 if (IsValidHex(input) && input.Length == 16)
                 {
                     lbl_input.Text = $"Input: {input.ToUpper()}";
-                    CalculateAndDisplay(input, this.key);
+                    CalculateAndDisplay(input, this.key, 0);
                 }
                 else
-                    MessageBox.Show("Key must be 64-bit Hexadecimal format", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                      MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch(Exception ex)
             {
-                if (key == "" || key == null)
-                    MessageBox.Show("You must save keys first.", "Information", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No keys!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_decrypt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string input = txt_input.Text.Replace(" ", string.Empty).ToLower().Trim();
+                if (IsValidHex(input) && input.Length == 16)
+                {
+                    lbl_input.Text = $"Input: {input.ToUpper()}";
+                    CalculateAndDisplay(input, this.key, 1);
+                }
+                else
+                {
+                    MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No keys!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

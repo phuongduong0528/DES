@@ -46,14 +46,25 @@ namespace DES.Ults
             return BinStringToIntArray(HexStringToBinString(hex));
         }
 
-        public string BinArrayToHex(int[] bin)
+        public string BinArrayToHex(int[] bin, int padding)
         {
             string re = string.Empty;
             for (int i = 0; i < bin.Length; i++)
             {
                 re += bin[i].ToString();
             }
-            return Convert.ToUInt64(re, 2).ToString("X");
+            if(padding == 8)
+            {
+                return Convert.ToUInt64(re, 2).ToString("X8");
+            }
+            if(padding == 12)
+            {
+                return Convert.ToUInt64(re, 2).ToString("X12");
+            }
+            else
+            {
+                return Convert.ToUInt64(re, 2).ToString("X16");
+            }
         }
 
         public int[] SubArray(int[] src,int start, int end)

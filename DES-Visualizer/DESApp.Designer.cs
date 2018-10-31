@@ -38,8 +38,8 @@
             this.btn_decrypt = new System.Windows.Forms.Button();
             this.lbl_key = new System.Windows.Forms.Label();
             this.lbl_input = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_time = new System.Windows.Forms.Label();
+            this.lbl_output = new System.Windows.Forms.Label();
             this.btn_saveKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -55,11 +55,11 @@
             this.rtb_main.TabIndex = 0;
             this.rtb_main.Text = "";
             // 
-            // rtb_key
+            // txt_key
             // 
             this.txt_key.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_key.Location = new System.Drawing.Point(9, 35);
-            this.txt_key.Name = "rtb_key";
+            this.txt_key.Name = "txt_key";
             this.txt_key.Size = new System.Drawing.Size(257, 23);
             this.txt_key.TabIndex = 1;
             // 
@@ -134,6 +134,7 @@
             this.btn_decrypt.TabIndex = 3;
             this.btn_decrypt.Text = "Decrypt";
             this.btn_decrypt.UseVisualStyleBackColor = true;
+            this.btn_decrypt.Click += new System.EventHandler(this.btn_decrypt_Click);
             // 
             // lbl_key
             // 
@@ -155,25 +156,25 @@
             this.lbl_input.TabIndex = 4;
             this.lbl_input.Text = "Input";
             // 
-            // label5
+            // lbl_time
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 299);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 17);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Time";
+            this.lbl_time.AutoSize = true;
+            this.lbl_time.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_time.Location = new System.Drawing.Point(12, 299);
+            this.lbl_time.Name = "lbl_time";
+            this.lbl_time.Size = new System.Drawing.Size(36, 17);
+            this.lbl_time.TabIndex = 4;
+            this.lbl_time.Text = "Time";
             // 
-            // label6
+            // lbl_output
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 267);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Output";
+            this.lbl_output.AutoSize = true;
+            this.lbl_output.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_output.Location = new System.Drawing.Point(12, 267);
+            this.lbl_output.Name = "lbl_output";
+            this.lbl_output.Size = new System.Drawing.Size(48, 17);
+            this.lbl_output.TabIndex = 4;
+            this.lbl_output.Text = "Output";
             // 
             // btn_saveKey
             // 
@@ -195,8 +196,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 498);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lbl_output);
+            this.Controls.Add(this.lbl_time);
             this.Controls.Add(this.lbl_input);
             this.Controls.Add(this.lbl_key);
             this.Controls.Add(this.btn_decrypt);
@@ -227,8 +228,8 @@
         private System.Windows.Forms.Button btn_decrypt;
         private System.Windows.Forms.Label lbl_key;
         private System.Windows.Forms.Label lbl_input;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_time;
+        private System.Windows.Forms.Label lbl_output;
         private System.Windows.Forms.Button btn_saveKey;
     }
 }
