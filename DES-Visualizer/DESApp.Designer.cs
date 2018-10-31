@@ -28,48 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.rtb_key = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.rtb_main = new System.Windows.Forms.RichTextBox();
+            this.txt_key = new System.Windows.Forms.TextBox();
+            this.txt_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_randomKey = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_encrypt = new System.Windows.Forms.Button();
+            this.btn_decrypt = new System.Windows.Forms.Button();
             this.lbl_key = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_input = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_saveKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // rtb_main
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rtb_main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(279, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(602, 473);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.rtb_main.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb_main.Location = new System.Drawing.Point(279, 12);
+            this.rtb_main.Name = "rtb_main";
+            this.rtb_main.Size = new System.Drawing.Size(602, 473);
+            this.rtb_main.TabIndex = 0;
+            this.rtb_main.Text = "";
             // 
             // rtb_key
             // 
-            this.rtb_key.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb_key.Location = new System.Drawing.Point(9, 35);
-            this.rtb_key.Name = "rtb_key";
-            this.rtb_key.Size = new System.Drawing.Size(257, 23);
-            this.rtb_key.TabIndex = 1;
+            this.txt_key.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_key.Location = new System.Drawing.Point(9, 35);
+            this.txt_key.Name = "rtb_key";
+            this.txt_key.Size = new System.Drawing.Size(257, 23);
+            this.txt_key.TabIndex = 1;
             // 
-            // textBox2
+            // txt_input
             // 
-            this.textBox2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(9, 130);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(257, 23);
-            this.textBox2.TabIndex = 1;
+            this.txt_input.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_input.Location = new System.Drawing.Point(9, 130);
+            this.txt_input.Name = "txt_input";
+            this.txt_input.Size = new System.Drawing.Size(257, 23);
+            this.txt_input.TabIndex = 1;
             // 
             // label1
             // 
@@ -106,33 +106,34 @@
             this.btn_randomKey.UseVisualStyleBackColor = true;
             this.btn_randomKey.Click += new System.EventHandler(this.btn_randomKey_Click);
             // 
-            // button2
+            // btn_encrypt
             // 
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(9, 152);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Encrypt";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_encrypt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btn_encrypt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btn_encrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_encrypt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_encrypt.Location = new System.Drawing.Point(9, 152);
+            this.btn_encrypt.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_encrypt.Name = "btn_encrypt";
+            this.btn_encrypt.Size = new System.Drawing.Size(129, 23);
+            this.btn_encrypt.TabIndex = 3;
+            this.btn_encrypt.Text = "Encrypt";
+            this.btn_encrypt.UseVisualStyleBackColor = true;
+            this.btn_encrypt.Click += new System.EventHandler(this.btn_encrypt_Click);
             // 
-            // button3
+            // btn_decrypt
             // 
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(137, 152);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(129, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Decrypt";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_decrypt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btn_decrypt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btn_decrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_decrypt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_decrypt.Location = new System.Drawing.Point(137, 152);
+            this.btn_decrypt.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_decrypt.Name = "btn_decrypt";
+            this.btn_decrypt.Size = new System.Drawing.Size(129, 23);
+            this.btn_decrypt.TabIndex = 3;
+            this.btn_decrypt.Text = "Decrypt";
+            this.btn_decrypt.UseVisualStyleBackColor = true;
             // 
             // lbl_key
             // 
@@ -144,15 +145,15 @@
             this.lbl_key.TabIndex = 4;
             this.lbl_key.Text = "Key";
             // 
-            // label4
+            // lbl_input
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 236);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Input";
+            this.lbl_input.AutoSize = true;
+            this.lbl_input.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_input.Location = new System.Drawing.Point(12, 236);
+            this.lbl_input.Name = "lbl_input";
+            this.lbl_input.Size = new System.Drawing.Size(37, 17);
+            this.lbl_input.TabIndex = 4;
+            this.lbl_input.Text = "Input";
             // 
             // label5
             // 
@@ -189,25 +190,25 @@
             this.btn_saveKey.UseVisualStyleBackColor = true;
             this.btn_saveKey.Click += new System.EventHandler(this.btn_saveKey_Click);
             // 
-            // Form1
+            // DESApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 498);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lbl_input);
             this.Controls.Add(this.lbl_key);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_decrypt);
+            this.Controls.Add(this.btn_encrypt);
             this.Controls.Add(this.btn_saveKey);
             this.Controls.Add(this.btn_randomKey);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.rtb_key);
-            this.Controls.Add(this.richTextBox1);
-            this.Name = "Form1";
+            this.Controls.Add(this.txt_input);
+            this.Controls.Add(this.txt_key);
+            this.Controls.Add(this.rtb_main);
+            this.Name = "DESApp";
             this.Text = "DES Visualizer";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -216,16 +217,16 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox rtb_key;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.RichTextBox rtb_main;
+        private System.Windows.Forms.TextBox txt_key;
+        private System.Windows.Forms.TextBox txt_input;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_randomKey;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_encrypt;
+        private System.Windows.Forms.Button btn_decrypt;
         private System.Windows.Forms.Label lbl_key;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_input;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_saveKey;
