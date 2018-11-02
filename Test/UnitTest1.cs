@@ -12,6 +12,10 @@ namespace Test
         [TestMethod]
         public void TestMethod1()
         {
+            DESCBC dcbc = new DESCBC("AABB09182736CCDD", "AAAAAAAAAAAAAAAA");
+            dcbc.Create();
+            dcbc.EncryptCBC("0000000000000000ABCDEF1234567890");
+            var x = dcbc.CbcCipherText;
             //DES.DES a = new DES.DES("ffffffffffffffff");
             //DESModules m = new DESModules();
             //a.Create();

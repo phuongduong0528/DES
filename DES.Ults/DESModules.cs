@@ -31,7 +31,7 @@ namespace DES.Ults
             return result;
         }
 
-        private int[] BinStringToIntArray(string bin)
+        private int[] BinStringToBinArray(string bin)
         {
             List<int> result = new List<int>();
             for (int i = 0; i < bin.Length; i++)
@@ -41,9 +41,9 @@ namespace DES.Ults
             return result.ToArray();
         }
 
-        public int[] HexStringToIntArray(string hex)
+        public int[] HexStringToBinArray(string hex)
         {
-            return BinStringToIntArray(HexStringToBinString(hex));
+            return BinStringToBinArray(HexStringToBinString(hex));
         }
 
         public string BinArrayToHex(int[] bin, int padding)
@@ -143,7 +143,7 @@ namespace DES.Ults
                 temp--;
             }
             row = 2 * inBlock[0] + inBlock[5];
-            inBlock = HexStringToIntArray(Convert.ToString(Sbox[row, column], 16));
+            inBlock = HexStringToBinArray(Convert.ToString(Sbox[row, column], 16));
         }
         
         private void Substitude(int[] inputBlock, ref int[] outputBlock)

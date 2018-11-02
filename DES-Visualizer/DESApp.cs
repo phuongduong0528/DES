@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DES;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace DES_Visualizer
     {
         private DES.DESMain des;
         private string key;
+        private string iv;
         private string output;
 
         public DESApp()
@@ -55,7 +57,7 @@ namespace DES_Visualizer
             }
 
             display += $"Input data:  {hex.ToUpper()}";
-            display += $"\nFinal data: {final}\n\n";
+            display += $"\nFinal data:  {final}\n\n";
             display += $"After Initial Permutation: {des.TraceInit}\n\n";
             display += "Left".PadLeft(24) + "Right".PadLeft(21) + "Key".PadLeft(14) + "\n";
             display += "--------------------------------------------------------------------\n";
@@ -90,11 +92,55 @@ namespace DES_Visualizer
                 this.key = key;
             }
             else
-                MessageBox.Show("Key must be 64-bit Hexadecimal format", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                if (key.Length > 16)
+                {
+                    MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    txt_key.Text = key.PadLeft(16, '0').ToUpper();
+                    btn_saveKey_Click(sender, e);
+                }
+            }
         }
 
         private void btn_encrypt_Click(object sender, EventArgs e)
+        {
+            if (!ckb_cbc.Checked)
+                Encrypt();
+            else
+                EncryptCBC();
+
+        }
+
+        private void EncryptCBC()
+        {
+            try
+            {
+                string input = txt_input.Text.Replace(" ", string.Empty).ToLower().Trim();
+                if (IsValidHex(input) && input.Length % 16 == 0)
+                {
+                    DESCBC descbc = new DESCBC(key, iv);
+                    descbc.Create();
+                    descbc.EncryptCBC(input);
+                    lbl_output.Text = $"Output: {descbc.CbcCipherText}";
+                }
+                else
+                {
+                    txt_input.Text = input.PadLeft((16 * ((input.Length / 16) + 1)), '0').ToUpper();
+                    EncryptCBC();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Keys or IV not saved!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Encrypt()
         {
             try
             {
@@ -106,11 +152,19 @@ namespace DES_Visualizer
                 }
                 else
                 {
-                    MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                    if(input.Length > 16)
+                    {
+                        MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        txt_input.Text = input.PadLeft(16, '0').ToUpper();
+                        Encrypt();
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("No keys!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -118,6 +172,18 @@ namespace DES_Visualizer
         }
 
         private void btn_decrypt_Click(object sender, EventArgs e)
+        {
+            if (!ckb_cbc.Checked)
+                Decrypt();
+            else
+                DecryptCBC();
+        }
+
+        private void DecryptCBC()
+        {
+        }
+
+        private void Decrypt()
         {
             try
             {
@@ -129,8 +195,16 @@ namespace DES_Visualizer
                 }
                 else
                 {
-                    MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (input.Length > 16)
+                    {
+                        MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                      MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        txt_input.Text = input.PadLeft(16, '0').ToUpper();
+                        Decrypt();
+                    }
                 }
             }
             catch (Exception ex)
@@ -138,6 +212,46 @@ namespace DES_Visualizer
                 MessageBox.Show("No keys!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ckb_cbc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ckb_cbc.Checked)
+            {
+                btn_iv_ran.Enabled = false;
+                btn_iv_sav.Enabled = false;
+                txt_iv.Enabled = false;
+                lbl_iv.Enabled = false;
+            }
+            else
+            {
+                btn_iv_ran.Enabled = true;
+                btn_iv_sav.Enabled = true;
+                txt_iv.Enabled = true;
+                lbl_iv.Enabled = true;
+            }
+        }
+
+        private void btn_iv_ran_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            int l = random.Next();
+            int r = random.Next();
+            string res = l.ToString("X8") + r.ToString("X8");
+            txt_iv.Text = res;
+        }
+
+        private void btn_iv_sav_Click(object sender, EventArgs e)
+        {
+            string iv = txt_iv.Text.Replace(" ", string.Empty).ToLower().Trim();
+            if (IsValidHex(iv) && iv.Length == 16)
+            {
+                lbl_iv1.Text = $"IV: {iv.ToUpper()}";
+                this.iv = iv;
+            }
+            else
+                MessageBox.Show("IV must be 64-bit Hexadecimal format", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

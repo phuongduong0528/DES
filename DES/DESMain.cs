@@ -9,8 +9,8 @@ namespace DES
 {
     public class DESMain
     {
-        DESModules modules;
-        private string key;
+        protected DESModules modules;
+        protected string key;
         private string cipherText;
         private string decryptedText;
         private int[][] roundKeys;
@@ -38,12 +38,12 @@ namespace DES
         public void Create()
         {
             modules = new DESModules();
-            roundKeys = modules.GenerateRoundKey(modules.HexStringToIntArray(key));
+            roundKeys = modules.GenerateRoundKey(modules.HexStringToBinArray(key));
         }
 
         public void Encrypt(string hexString)
         {
-            int[] binArray = modules.HexStringToIntArray(hexString);
+            int[] binArray = modules.HexStringToBinArray(hexString);
             
             modules.InitialPermutation(ref binArray);
             traceInit = modules.BinArrayToHex(binArray,0);
@@ -79,7 +79,7 @@ namespace DES
 
         public void Decrypt(string hexString)
         {
-            int[] binArray = modules.HexStringToIntArray(hexString);
+            int[] binArray = modules.HexStringToBinArray(hexString);
 
             modules.InitialPermutation(ref binArray);
             traceInit = modules.BinArrayToHex(binArray, 0);
