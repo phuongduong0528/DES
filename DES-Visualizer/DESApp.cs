@@ -14,7 +14,7 @@ namespace DESUI
 {
     public partial class DESApp : Form
     {
-        private DES.DESMain des;
+        private DESMain des;
         private string key;
         private string iv;
         private string output;
@@ -93,6 +93,12 @@ namespace DESUI
             }
             else
             {
+                if (!IsValidHex(key))
+                {
+                    MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 if (key.Length > 16)
                 {
                     MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
@@ -125,10 +131,17 @@ namespace DESUI
                     DESCBC descbc = new DESCBC(key, iv);
                     descbc.Create();
                     descbc.EncryptCBC(input);
-                    rtb_main.Text = $"Input:   {input}\nOutput: {descbc.CbcCipherText}";
+                    rtb_main.Text = $"Input:   {input}\nOutput:  {descbc.CbcCipherText}";
+                    lbl_output.Text = "";
                 }
                 else
                 {
+                    if (!IsValidHex(input))
+                    {
+                        MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     txt_input.Text = input.PadLeft((16 * ((input.Length / 16) + 1)), '0').ToUpper();
                     EncryptCBC();
                 }
@@ -159,6 +172,12 @@ namespace DESUI
                     }
                     else
                     {
+                        if (!IsValidHex(input))
+                        {
+                            MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         txt_input.Text = input.PadLeft(16, '0').ToUpper();
                         Encrypt();
                     }
@@ -189,10 +208,17 @@ namespace DESUI
                     DESCBC descbc = new DESCBC(key, iv);
                     descbc.Create();
                     descbc.DecryptCBC(input);
-                    rtb_main.Text = $"Input:   {input}\nOutput: {descbc.CbcDecryptText}";
+                    rtb_main.Text = $"Input:   {input}\nOutput:  {descbc.CbcDecryptText}";
+                    lbl_output.Text = "";
                 }
                 else
                 {
+                    if (!IsValidHex(input))
+                    {
+                        MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     txt_input.Text = input.PadLeft((16 * ((input.Length / 16) + 1)), '0').ToUpper();
                     DecryptCBC();
                 }
@@ -223,6 +249,12 @@ namespace DESUI
                     }
                     else
                     {
+                        if (!IsValidHex(input))
+                        {
+                            MessageBox.Show("Input must be 64-bit Hexadecimal format", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         txt_input.Text = input.PadLeft(16, '0').ToUpper();
                         Decrypt();
                     }

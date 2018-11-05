@@ -54,11 +54,11 @@ namespace DES
         public void DecryptCBC(string hex)
         {
             CBCSplit(hex);
-            int[] cbcRoundOutput = block[0];
+            int[] cbcRoundOutput;
             int[] iv = modules.HexStringToBinArray(IV);
-            Decrypt(modules.BinArrayToHex(cbcRoundOutput, 16));
+            Decrypt(modules.BinArrayToHex(block[0], 16));
             cbcRoundOutput = modules.HexStringToBinArray(DecryptText);
-            cbcRoundOutput = modules.XOR(cbcRoundOutput, modules.HexStringToBinArray(DecryptText));
+            cbcRoundOutput = modules.XOR(cbcRoundOutput, iv);
             cbcDecryptText += modules.BinArrayToHex(cbcRoundOutput,16);
             for (int i = 1; i < block.Count(); i++)
             {
