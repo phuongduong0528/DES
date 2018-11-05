@@ -125,7 +125,7 @@ namespace DES_Visualizer
                     DESCBC descbc = new DESCBC(key, iv);
                     descbc.Create();
                     descbc.EncryptCBC(input);
-                    lbl_output.Text = $"Output: {descbc.CbcCipherText}";
+                    rtb_main.Text = $"Input:   {input}\nOutput: {descbc.CbcCipherText}";
                 }
                 else
                 {
@@ -181,6 +181,27 @@ namespace DES_Visualizer
 
         private void DecryptCBC()
         {
+            try
+            {
+                string input = txt_input.Text.Replace(" ", string.Empty).ToLower().Trim();
+                if (IsValidHex(input) && input.Length % 16 == 0)
+                {
+                    DESCBC descbc = new DESCBC(key, iv);
+                    descbc.Create();
+                    descbc.DecryptCBC(input);
+                    rtb_main.Text = $"Input:   {input}\nOutput: {descbc.CbcDecryptText}";
+                }
+                else
+                {
+                    txt_input.Text = input.PadLeft((16 * ((input.Length / 16) + 1)), '0').ToUpper();
+                    DecryptCBC();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Keys or IV not saved!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Decrypt()

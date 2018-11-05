@@ -14,17 +14,19 @@ namespace DES
         private List<int[]> block;
 
         public string CbcCipherText => cbcCipherText;
-        public string CbcDecryptText => CbcDecryptText;
+        public string CbcDecryptText => cbcDecryptText;
 
         public DESCBC(string key, string IV) : base(key)
         {
             this.IV = IV;
             cbcCipherText = "";
+            cbcDecryptText = "";
             block = new List<int[]>();
         }
 
         private void CBCSplit(string hex)
         {
+            block = new List<int[]>();
             int[] input = modules.HexStringToBinArray(hex);
             for (int i = 0; i < (input.Length / 64); i++)
             {
@@ -52,17 +54,19 @@ namespace DES
         public void DecryptCBC(string hex)
         {
             CBCSplit(hex);
-            int[] cbcRoundInput = block[0];
+            int[] cbcRoundOutput = block[0];
             int[] iv = modules.HexStringToBinArray(IV);
-            cbcRoundInput = modules.XOR(cbcRoundInput, iv);
-            Decrypt(modules.BinArrayToHex(cbcRoundInput, 16));
-            cbcDecryptText += DecryptText;
+            Decrypt(modules.BinArrayToHex(cbcRoundOutput, 16));
+            cbcRoundOutput = modules.HexStringToBinArray(DecryptText);
+            cbcRoundOutput = modules.XOR(cbcRoundOutput, modules.HexStringToBinArray(DecryptText));
+            cbcDecryptText += modules.BinArrayToHex(cbcRoundOutput,16);
             for (int i = 1; i < block.Count(); i++)
             {
-                int[] prevOutput = modules.HexStringToBinArray(CipherText);
-                cbcRoundInput = modules.XOR(block[i], prevOutput);
-                Decrypt(modules.BinArrayToHex(cbcRoundInput, 16));
-                cbcDecryptText += DecryptText;
+                int[] prevInput = block[i - 1];
+                Decrypt(modules.BinArrayToHex(block[i], 16));
+                cbcRoundOutput = modules.HexStringToBinArray(DecryptText);
+                cbcRoundOutput = modules.XOR(cbcRoundOutput, prevInput);
+                cbcDecryptText += modules.BinArrayToHex(cbcRoundOutput,16);
             }
         }
     }
