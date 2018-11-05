@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DES", "DES\DES.csproj", "{B5B99E8F-7DAF-4DF1-B7C3-F8BD976A6D01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DES-Visualizer", "DES-Visualizer\DES-Visualizer.csproj", "{A953D42E-1478-4476-BC13-EBAD28ECF51A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DES.UI", "DES-Visualizer\DES.UI.csproj", "{A953D42E-1478-4476-BC13-EBAD28ECF51A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

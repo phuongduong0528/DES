@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DES_Visualizer.Properties
+namespace DESUI.Properties
 {
 
 

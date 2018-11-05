@@ -1,4 +1,4 @@
-﻿namespace DES_Visualizer
+﻿namespace DESUI
 {
     partial class DESApp
     {

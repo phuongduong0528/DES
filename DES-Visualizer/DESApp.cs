@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DES_Visualizer
+namespace DESUI
 {
     public partial class DESApp : Form
     {
