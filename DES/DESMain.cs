@@ -17,11 +17,13 @@ namespace DES
         private string traceInit;
         private string traceFinal;
         private string[][] traceRound;
+        private string cipherKey;
 
         public string CipherText => cipherText;
         public string DecryptText => decryptedText;
         public string TraceInit => traceInit;
         public string TraceFinal => traceFinal;
+        public string CipherKey => cipherKey;
         public string[][] TraceRound => traceRound;
 
         public DESMain(string key)
@@ -32,6 +34,7 @@ namespace DES
             roundKeys = new int[16][];
             traceInit = "";
             traceFinal = "";
+            cipherKey = "";
             traceRound = new string[16][];
         }
 
@@ -39,6 +42,7 @@ namespace DES
         {
             modules = new DESModules();
             roundKeys = modules.GenerateRoundKey(modules.HexStringToBinArray(key));
+            cipherKey = modules.CipherKey;
         }
 
         public void Encrypt(string hexString)

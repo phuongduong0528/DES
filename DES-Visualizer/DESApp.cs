@@ -56,8 +56,10 @@ namespace DESUI
                 final = des.DecryptText.ToUpper();
             }
 
-            display += $"Input data:  {hex.ToUpper()}";
-            display += $"\nFinal data:  {final}\n\n";
+            display += $"Key with parity bits:  {key.ToUpper()}";
+            display += $"\nInput data:            {hex.ToUpper()}";
+            display += $"\nFinal data:            {final}\n\n";
+            display += $"Cipher key:                {des.CipherKey}\n";
             display += $"After Initial Permutation: {des.TraceInit}\n\n";
             display += "Left".PadLeft(24) + "Right".PadLeft(21) + "Key".PadLeft(14) + "\n";
             display += "--------------------------------------------------------------------\n";
@@ -67,8 +69,8 @@ namespace DESUI
                 count++;
                 display += "Round" + $"{count}".PadLeft(3) + item[0].PadLeft(20) + item[1].PadLeft(20) + item[2].PadLeft(20) + "\n";
             }
-            display += $"\nBefore FinalPermutation: {des.TraceFinal}\n";
-            display += $"Final:                   {final}";
+            display += $"\nBefore Final Permutation: {des.TraceFinal}\n";
+            display += $"Final:                    {final}";
             lbl_output.Text = $"Output: {final}";
             lbl_time.Text = $"Time: {sw.Elapsed.TotalMilliseconds}" + " ms";
             rtb_main.Text = display;
@@ -131,7 +133,7 @@ namespace DESUI
                     DESCBC descbc = new DESCBC(key, iv);
                     descbc.Create();
                     descbc.EncryptCBC(input);
-                    rtb_main.Text = $"Input:   {input}\nOutput:  {descbc.CbcCipherText}";
+                    rtb_main.Text = $"Input:   {input.ToUpper()}\nOutput:  {descbc.CbcCipherText}";
                     lbl_output.Text = "";
                 }
                 else
@@ -208,7 +210,7 @@ namespace DESUI
                     DESCBC descbc = new DESCBC(key, iv);
                     descbc.Create();
                     descbc.DecryptCBC(input);
-                    rtb_main.Text = $"Input:   {input}\nOutput:  {descbc.CbcDecryptText}";
+                    rtb_main.Text = $"Input:   {input.ToUpper()}\nOutput:  {descbc.CbcDecryptText}";
                     lbl_output.Text = "";
                 }
                 else

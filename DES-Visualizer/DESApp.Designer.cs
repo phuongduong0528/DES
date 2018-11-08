@@ -201,7 +201,7 @@
             // 
             this.ckb_cbc.AutoSize = true;
             this.ckb_cbc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_cbc.Location = new System.Drawing.Point(179, 203);
+            this.ckb_cbc.Location = new System.Drawing.Point(62, 203);
             this.ckb_cbc.Name = "ckb_cbc";
             this.ckb_cbc.Size = new System.Drawing.Size(50, 21);
             this.ckb_cbc.TabIndex = 5;

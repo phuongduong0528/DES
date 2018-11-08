@@ -8,6 +8,8 @@ namespace DES.Ults
 {
     public class DESModules
     {
+        private string cipherKey;
+        public string CipherKey => cipherKey;
         public int[] XOR(int[] arg1, int[] arg2)
         {
             int[] re = new int[arg1.Length];
@@ -53,18 +55,30 @@ namespace DES.Ults
             {
                 re += bin[i].ToString();
             }
-            if(padding == 8)
-            {
-                return Convert.ToUInt64(re, 2).ToString("X8");
-            }
-            if(padding == 12)
-            {
-                return Convert.ToUInt64(re, 2).ToString("X12");
-            }
-            else
+            if(padding == 0)
             {
                 return Convert.ToUInt64(re, 2).ToString("X16");
             }
+            else
+            {
+                return Convert.ToUInt64(re, 2).ToString($"X{padding}");
+            }
+            //if(padding == 8)
+            //{
+            //    return Convert.ToUInt64(re, 2).ToString("X8");
+            //}
+            //if(padding == 12)
+            //{
+            //    return Convert.ToUInt64(re, 2).ToString("X12");
+            //}
+            //if(padding == 14)
+            //{
+            //    return Convert.ToUInt64(re, 2).ToString("X14");
+            //}
+            //else
+            //{
+            //    return Convert.ToUInt64(re, 2).ToString("X16");
+            //}
         }
 
         public int[] SubArray(int[] src,int start, int end)
@@ -87,6 +101,7 @@ namespace DES.Ults
             int[] rightTempKey= new int[28];
             int[] roundkey;
             Permute(keys, ref tempkey, DESConstants.ParityBitDrop);
+            cipherKey = BinArrayToHex(tempkey, 14);
             for (int i = 0; i < 16; i++)
             {
                 roundkey = new int[48];
