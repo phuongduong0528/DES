@@ -59,8 +59,8 @@ namespace DESUI
             display += $"Key with parity bits:  {key.ToUpper()}";
             display += $"\nInput data:            {hex.ToUpper()}";
             display += $"\nFinal data:            {final}\n\n";
-            display += $"Cipher key:                {des.CipherKey}\n";
-            display += $"After Initial Permutation: {des.TraceInit}\n\n";
+            display += $"Cipher key:                      {des.CipherKey}\n";
+            display += $"Input after Initial Permutation: {des.TraceInit}\n\n";
             display += "Left".PadLeft(24) + "Right".PadLeft(21) + "Key".PadLeft(14) + "\n";
             display += "--------------------------------------------------------------------\n";
             int count = 0;
